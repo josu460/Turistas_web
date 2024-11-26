@@ -1,0 +1,6 @@
+.fondo {
+    background-image: url('/img/plane.jpg'); /* Ruta a la imagen */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
