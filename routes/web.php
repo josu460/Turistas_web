@@ -18,3 +18,9 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+require __DIR__.'/auth.php';
+require __DIR__.'/rutasjosue.php';
+require __DIR__.'/rutascristopher.php';
+require __DIR__.'/rutasluis.php';
+require __DIR__.'/rutasangel.php';
+require __DIR__.'/rutasbeto.php';
