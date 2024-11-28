@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 class hotelescontroller extends Controller
 {
+    public function inicio() {
+
+        return view('home');
+    }
     /**
      * Display a listing of the resource.
      */
