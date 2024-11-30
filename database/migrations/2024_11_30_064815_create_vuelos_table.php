@@ -10,16 +10,16 @@ class CreateVuelosTable extends Migration
     {
         Schema::create('vuelos', function (Blueprint $table) {
             $table->id();
-            $table->string('no_vuelo');
-            $table->date('fecha_ida');
-            $table->date('fecha_regreso')->nullable();
+            $table->string('novuelo');
+            $table->date('fechasalida');
+            $table->date('fecharegreso')->nullable();
             $table->decimal('precio', 10, 2);
             $table->time('hora');
             $table->integer('duracion'); 
             $table->foreignId('id_aerolinea')->constrained('aerolineas')->onDelete('cascade');
             $table->foreignId('id_origen')->constrained('lugares')->onDelete('cascade');
             $table->foreignId('id_destino')->constrained('lugares')->onDelete('cascade');
-            $table->timestamps();
+            $table->timestamps(); 
         });
     }
 

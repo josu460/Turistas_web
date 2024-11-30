@@ -9,9 +9,9 @@ class CreatePasajerosTable extends Migration
     public function up()
     {
         Schema::create('pasajeros', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('id_cliente')->constrained('clientes')->onDelete('cascade');
-            $table->foreignId('id_tipo_pasajero')->constrained('tipos_pasajeros')->onDelete('cascade');
+            $table->id(); 
+            $table->foreignId('id_users')->constrained('users')->onDelete('cascade');
+            $table->foreignId('id_tipo_pasajero')->constrained('tipopasajeros')->onDelete('cascade');
             $table->timestamps();
         });
     }

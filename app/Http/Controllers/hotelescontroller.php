@@ -9,13 +9,14 @@ class hotelescontroller extends Controller
 {
     public function RegistrarHotel()
     {
-        return view('registroHoteles');
+        return view('adminhoteles.HotelesA');
     }
 
-    public function ConsultarHotel() {
-
-        return view('consultarHotel');
+    public function ConsultarHotel()
+    {
+        return view('adminhoteles.consultaH');
     }
+    
 
     public function inicio() {
 
@@ -37,20 +38,21 @@ class hotelescontroller extends Controller
     public function addHoteles(RegistrarHotel $peticion) 
     {
         $validacion = $peticion->validate([    
-        'nombreHotel' => 'required|string|max:255',
-        'categoria' => 'required|in:Economico,Medio,Lujo',
-        'precio' => 'required|numeric|min:0',
-        'servicios' => 'required|string',
-        'distancia' => 'required|numeric|min:0',
-        'estrellas' => 'required|integer|between:1,5',]);
+            'hotel' => 'required|string|max:255',
+            'no_habitaciones' => 'required|integer|min:1',
+            'calificacion' => 'nullable|integer|between:1,5',
+            'precio' => 'required|numeric|min:0',
+            'ubicacion' => 'required|string|max:255',
+            'descripcion' => 'required|string',
+            'politicas_cancelacion' => 'nullable|string',]);
 
-        $hotel = $peticion->input('nombreHotel');
+        $hotel = $peticion->input('hotel');
         
             session()->flash('exito', 'Todo correcto: ' . $hotel . ' Hotel guardado');
 
 
             
-            return redirect('consultaHoteles');
+            return redirect('consultaH');
     
         
     }

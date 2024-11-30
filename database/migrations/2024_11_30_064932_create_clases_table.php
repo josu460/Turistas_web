@@ -9,8 +9,10 @@ class CreateClasesTable extends Migration
     public function up()
     {
         Schema::create('clases', function (Blueprint $table) {
-            $table->id();
-            $table->string('clase');
+            $table->id(); 
+            $table->string('economica')->nullable();
+            $table->string('ejecutiva')->nullable();
+            $table->string('primera_clase')->nullable();
             $table->timestamps();
         });
     }
