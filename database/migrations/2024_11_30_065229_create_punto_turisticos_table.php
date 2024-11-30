@@ -4,19 +4,19 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAerolineasTable extends Migration
+class CreatePuntoTuristicosTable extends Migration
 {
     public function up()
     {
-        Schema::create('aerolineas', function (Blueprint $table) {
-            $table->id();
-            $table->string('aerolinea');
+        Schema::create('puntoturisticos', function (Blueprint $table) {
+            $table->id(); 
+            $table->string('punto');
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('aerolineas');
+        Schema::dropIfExists('puntoturisticos');
     }
 }

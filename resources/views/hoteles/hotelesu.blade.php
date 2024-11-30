@@ -5,7 +5,6 @@
         </h2>
     </x-slot>
 
-    @extends('layouts.navbarusuario')
     @section('titulo', 'Hoteles')
     @section('contenido')
 
@@ -436,7 +435,6 @@
             document.getElementById("distance-value").textContent = value;
         }
     </script>
-    @endsection
 
     <x-Footer> </x-Footer>
 </x-app-layout>

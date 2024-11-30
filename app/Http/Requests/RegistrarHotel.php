@@ -14,18 +14,20 @@ class RegistrarHotel extends FormRequest
         return true; // Cambiar a `false` si se desea restringir acceso
     }
 
-    /**
+    /**x
      * Reglas de validación para el formulario.
      */
     public function rules()
     {
         return [
-            'nombreHotel' => 'required|string|max:255',
-            'categoria' => 'required|in:Economico,Medio,Lujo',
+            'hotel' => 'required|string|max:255',
+            'no_habitaciones' => 'required|integer|min:1',
+            'calificacion' => 'nullable|integer|between:1,5',
             'precio' => 'required|numeric|min:0',
-            'servicios' => 'required|string',
-            'distancia' => 'required|numeric|min:0',
-            'estrellas' => 'required|integer|between:1,5',
+            'ubicacion' => 'required|string|max:255',
+            'descripcion' => 'required|string',
+            'politicas_cancelacion' => 'nullable|string',
         ];
+        
     }
 }

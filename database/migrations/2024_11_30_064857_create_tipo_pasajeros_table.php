@@ -4,19 +4,19 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLugaresTable extends Migration
+class CreateTipoPasajerosTable extends Migration
 {
     public function up()
     {
-        Schema::create('lugares', function (Blueprint $table) {
+        Schema::create('tipopasajeros', function (Blueprint $table) {
             $table->id();
-            $table->string('lugar');
+            $table->string('tipo'); 
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('lugares');
+        Schema::dropIfExists('tipopasajeros');
     }
 }
