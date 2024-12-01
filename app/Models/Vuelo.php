@@ -47,3 +47,4 @@ class Vuelo extends Model
         return $this->belongsTo(Lugar::class, 'id_destino');
     }
 }
+    

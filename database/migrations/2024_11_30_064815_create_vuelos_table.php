@@ -16,6 +16,7 @@ class CreateVuelosTable extends Migration
             $table->decimal('precio', 10, 2);
             $table->time('hora');
             $table->integer('duracion'); 
+            
             $table->foreignId('id_aerolinea')->constrained('aerolineas')->onDelete('cascade');
             $table->foreignId('id_origen')->constrained('lugares')->onDelete('cascade');
             $table->foreignId('id_destino')->constrained('lugares')->onDelete('cascade');
