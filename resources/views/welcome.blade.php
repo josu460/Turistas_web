@@ -9,7 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
-            background-image: url('{{ asset("img/fondo.jpg") }}');
+            background-image: url('{{ asset("img/viajera.webp") }}');
             background-size: cover;
             background-position: center;
             font-family: 'Arial', sans-serif;
@@ -21,12 +21,12 @@
     <!-- Barra de Navegación -->
     <nav class="bg-transparent p-5 flex justify-between items-center">
         <div class="text-3xl font-bold">
-            <span class="text-red-600">V</span><span class="text-yellow-400">Vuelos</span>
+            <span class="text-red-600"></span><span class="text-yellow-400">Turista sin Maps</span>
         </div>
         <div class="flex space-x-8">
             @guest
-                <a href="{{ route('login') }}" class="text-white text-lg font-semibold hover:text-yellow-400 transition duration-300">Iniciar sesión</a>
-                <a href="{{ route('register') }}" class="text-white text-lg font-semibold hover:text-yellow-400 transition duration-300">Registrarse</a>
+                <a href="{{ route('login') }}" class="text-black text-lg font-semibold hover:text-yellow-400 transition duration-300">Iniciar sesión</a>
+                <a href="{{ route('register') }}" class="text-black text-lg font-semibold hover:text-yellow-400 transition duration-300">Registrarse</a>
             @else
                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="text-white text-lg font-semibold hover:text-yellow-400 transition duration-300">Cerrar sesión</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

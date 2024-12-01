@@ -10,7 +10,7 @@ class Vuelo extends Model
     use HasFactory;
 
     protected $table = 'vuelos';
-    protected $fillable = ['novuelo', 'fechasalida', 'fecharegreso', 'precio', 'hora', 'duracion', 'id_aerolinea', 'id_origen', 'id_destino'];
+    protected $fillable = ['novuelo', 'fechasalida', 'fecharegreso', 'precio', 'hora', 'duracion','imagen', 'id_aerolinea', 'id_origen', 'id_destino','numeroasientos'];
 
     // Relación muchos a muchos con Clientes
     public function clientes()

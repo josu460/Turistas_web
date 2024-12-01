@@ -4,16 +4,17 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\avionescontroller;
 use App\Http\Controllers\hotelescontroller;
 use App\Http\Controllers\Reportes;
+use App\Http\Controllers\VueloController;
+use App\Http\Controllers\PruebaAviones;
 
 Route::middleware('auth')->group(function () {
 
-
-
-Route::get('VuelosA',[avionescontroller::class,'ver'])->name('VuelosA');
-
+Route::get('VuelosA',[VueloController::class,'index'])->name('VuelosA');
 //Rutas para ver vuelos
 Route::get('/Vuelosu',[avionescontroller::class,'index'])->name('Vuelosu');
 
+Route::get('/vuelos/{id}/edit', [VueloController::class, 'edit'])->name('vuelos.edit');
+Route::put('/vuelos/{id}/update', [VueloController::class, 'update'])->name('vuelos.update');
 
 
 Route:: get('/HomeAdministrador', function () {
@@ -24,15 +25,10 @@ Route:: get('/HomeAdministrador', function () {
 Route::get('/reportes',[Reportes::class,'index'])->name('reportes');
 
 //RUTAS DE VUELOS 
-Route :: post('/enviarVuelo', [avionescontroller::class, 'VuelosBuscar'])->name('VuelosBuscar');
 
-Route :: post('/consultar', [avionescontroller::class, 'consultar'])->name('consultar');
+//rutas prueba 1 
+Route::resource('vuelos', VueloController::class);
 
-Route :: post('/crearVuelo', [avionescontroller::class, 'CrearVuelos'])->name('CrearVuelos');
-
-Route :: post('/editarVuelo', [avionescontroller::class, 'EditarVuelos'])->name('EditarVuelos');
-
-Route :: post('/comprarVuelo', [avionescontroller::class, 'ComprarVuelo'])->name('ComprarVuelo');
 
 });
 

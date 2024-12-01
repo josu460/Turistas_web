@@ -20,7 +20,8 @@ class AerolineaController extends Controller
      */
     public function create()
     {
-        //
+        $aerolineas = Aerolinea::all(); // Obtiene todas las aerolíneas
+        return view('crearVuelo', compact('aerolineas')); // Envía a la vista
     }
 
     /**
