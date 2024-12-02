@@ -1,6 +1,7 @@
 <nav x-data="{ open: false }" style="background-color: #58a0ad;" class="border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">

@@ -208,6 +208,16 @@
                                     class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg text-gray-800 focus:ring-blue-500 focus:border-blue-500">
                                 <small>{{$errors->first('numeroasientos')}}</small>
                             </div>
+                            
+                            <div>
+                                <label for="escala">Escala</label>
+                                <select name="escala" id="escala" class="form-control">
+                                    <option value="">Seleccione...</option>
+                                    <option value="noescala" {{ old('escala') == 'noescala' ? 'selected' : '' }}>Sin escala</option>
+                                    <option value="siescala" {{ old('escala') == 'siescala' ? 'selected' : '' }}>Con escala</option>
+                                </select>
+                            </div>
+
                             <div>
                                 <label for="imagen" class="block text-sm font-medium text-gray-700">Subir Imagen</label>
                                 <input type="file" id="imagen" name="imagen" accept="image/*"

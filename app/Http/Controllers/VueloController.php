@@ -93,6 +93,7 @@ class VueloController extends Controller
             'hora' => 'required|string',
             'duracion' => 'required|string',
             'numeroasientos' => 'required|integer',
+            'escala' => 'required|in:noescala,siescala',
             'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'id_aerolinea' => 'required|exists:aerolineas,id',
             'id_origen' => 'required|exists:lugares,id',  // Validación para origen
@@ -159,6 +160,7 @@ class VueloController extends Controller
             'hora' => 'required|string',
             'duracion' => 'required|string',
             'numeroasientos' => 'required|integer',
+            'escala' => 'required|in:noescala,siescala',
             'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -171,6 +173,7 @@ class VueloController extends Controller
             'hora' => $request->input('hora'),
             'duracion' => $request->input('duracion'),
             'numeroasientos' => $request->input('numeroasientos'),
+            'escala' => $request->input('escala'),
             'id_aerolinea' =>  $request->input('id_aerolinea'),
             'id_origen' =>  $request->input('id_origen'),
             'id_destino' =>  $request->input('id_destino'),

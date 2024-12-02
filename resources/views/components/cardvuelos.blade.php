@@ -24,6 +24,9 @@
             <strong>Horario de salida:</strong> {{ $vuelo->hora }} hrs
         </p>
         <p class="mb-3 font-bold text-gray-700 dark:text-gray-400 text-center">
+            <strong>Escala:</strong> {{ $vuelo->escala }} 
+        </p>
+        <p class="mb-3 font-bold text-gray-700 dark:text-gray-400 text-center">
             <strong>Numero de vuelo:</strong> {{ $vuelo->novuelo }}
         </p>
 

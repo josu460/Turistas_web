@@ -11,6 +11,7 @@
         <p><strong>Hora:</strong> {{ $vuelo->hora }}</p>
         <p><strong>Duración:</strong> {{ $vuelo->duracion }}</p>
         <p><strong>Número de Asientos:</strong> {{ $vuelo->numeroasientos }}</p>
+        <p><strong>Escalas:</strong> {{ $vuelo->escala }}</p>
         <p><strong>Aerolínea:</strong> {{ $vuelo->aerolinea->aerolinea }}</p>
         <p><strong>Origen:</strong> {{ $vuelo->origen->lugar }}</p>
         <p><strong>Destino:</strong> {{ $vuelo->destino->lugar }}</p>
@@ -86,6 +87,14 @@
                                     <label for="numeroasientos" class="block text-sm font-medium text-gray-700">Número de Asientos</label>
                                     <input type="text" id="numeroasientos" name="numeroasientos" class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg text-gray-800 focus:ring-blue-500 focus:border-blue-500" value="{{ old('numeroasientos', $vuelo->numeroasientos) }}">
                                     <small>{{$errors->first('numeroasientos')}}</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="escala">Escala</label>
+                                    <select name="escala" id="escala" class="form-control">
+                                        <option value="">Seleccione...</option>
+                                        <option value="noescala" {{ old('escala') == 'noescala' ? 'selected' : '' }}>Sin escala</option>
+                                        <option value="siescala" {{ old('escala') == 'siescala' ? 'selected' : '' }}>Con escala</option>
+                                    </select>
                                 </div>
 
                                 <!-- Imagen -->
@@ -189,14 +198,14 @@
                             </button>
                         </div>
                         @if (session('eliminado'))
-                                <script>
-                                    Swal.fire({
-                                        title: "Todo correcto ",
-                                        text: "{{ session('eliminado') }}",
-                                        icon: "success"
-                                    });
-                                </script>
-                                @endif
+                        <script>
+                            Swal.fire({
+                                title: "Todo correcto ",
+                                text: "{{ session('eliminado') }}",
+                                icon: "success"
+                            });
+                        </script>
+                        @endif
                     </div>
                 </div>
             </div>
