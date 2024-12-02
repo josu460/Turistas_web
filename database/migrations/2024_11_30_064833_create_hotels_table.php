@@ -17,6 +17,8 @@ class CreateHotelsTable extends Migration
             $table->string('ubicacion');
             $table->text('descripcion')->nullable();
             $table->text('politicas_cancelacion')->nullable();
+            $table->date('checkin'); // Fecha de inicio de disponibilidad
+            $table->date('checkout'); // Fecha de fin de disponibilidad
             $table->timestamps();
         });
     }

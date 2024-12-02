@@ -12,6 +12,12 @@ class Lugar extends Model
     protected $table = 'lugares';
     protected $fillable = ['lugar'];
 
+    // Relación N:N con Hoteles a través de la tabla intermedia 'hotelesdestinos'
+    public function hoteles()
+    {
+        return $this->belongsToMany(Hotel::class, 'hotelesdestinos', 'id_lugar', 'id_hotel');
+    }
+
     // Relación con Vuelos (origen y destino)
     public function vuelosOrigen()
     {
