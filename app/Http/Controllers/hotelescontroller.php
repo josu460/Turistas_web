@@ -32,6 +32,8 @@ class hotelescontroller extends Controller
         return view('hoteles.hotelesu');
     }
 
+    
+
 
     
 
