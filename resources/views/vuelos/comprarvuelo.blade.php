@@ -3,7 +3,7 @@
         <div class="container mx-auto p-4">
             <h2 class="text-lg font-bold mb-4">Comprar Vuelo - {{ $vuelo->destino->lugar }}</h2>
 
-            <form action="{{ route('confirmar.vuelo') }}" method="POST" id="compraVueloForm-{{ $vuelo->id }}" class="space-y-6">
+            <form action="{{ route('reservacion.store') }}" method="POST" id="compraVueloForm-{{ $vuelo->id }}" class="space-y-6">
                 @csrf
                 <!-- Información básica del vuelo -->
                 <input type="hidden" name="vuelo_id" value="{{ $vuelo->id }}">
@@ -35,7 +35,7 @@
                 </div>
 
                 <button type="submit" class="w-full py-2 px-3 bg-blue-700 hover:bg-blue-800 text-white font-semibold rounded-lg focus:outline-none">
-                    Confirmar Vuelo
+                   Hacer reservación de Vuelo
                 </button>
             </form>
         </div>

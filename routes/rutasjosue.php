@@ -7,6 +7,7 @@ use App\Http\Controllers\VueloController;
 use App\Http\Controllers\AerolineaController;
 use App\Http\Controllers\LugarController;
 use App\Http\Controllers\ClienteVueloController;
+use App\Http\Controllers\ReservacionController;
 
 Route::middleware('auth')->group(function () {
 
@@ -44,6 +45,9 @@ Route::resource('cliente_vuelos', ClienteVueloController::class);
 
 Route::get('/comprarvuelo/{vuelo}', [ClienteVueloController::class, 'mostrarVistaCompra'])->name('comprar.vuelo');
 Route::post('/comprarvuelo', [ClienteVueloController::class, 'confirmarCompra'])->name('confirmar.vuelo');
+
+//rutas de reservacion
+Route::resource('reservacion', ReservacionController::class);
 
 
 });

@@ -29,4 +29,8 @@ class Reservacion extends Model
     {
         return $this->belongsTo(Hotel::class, 'id_hotel');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_users');
+    }
 }
