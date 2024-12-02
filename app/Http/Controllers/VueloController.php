@@ -23,23 +23,34 @@ class VueloController extends Controller
     }
 
 
-    public function otraVista()
+    public function otraVista(Request $request)
     {
-        $vuelos = Vuelo::all();
+        // Inicializar la consulta para los vuelos
+        $vuelos = Vuelo::query();
         $aerolineas = Aerolinea::all();
-        $lugars = Lugar::all();
-        foreach ($vuelos as $vuelo) {
-            $vuelo->asientos = $this->generarAsientos($vuelo->numeroasientos); 
+        $lugares = Lugar::all();
+
+        if (!$request->isMethod('POST')) {
+
+            $resultados = $vuelos->get();
+        } else {
         }
 
-        return view('vuelos.Vuelosu', compact('vuelos', 'aerolineas', 'lugars'));
+        // Generar asientos para cada vuelo
+        foreach ($resultados as $vuelo) {
+            $vuelo->asientos = $this->generarAsientos($vuelo->numeroasientos);
+        }
+
+        // Pasar los resultados, aerolíneas y lugares a la vista
+        return view('vuelos.Vuelosu', compact('resultados', 'aerolineas', 'lugares'));
     }
+
 
     private function generarAsientos($totalAsientos)
     {
         $asientos = [];
         $filas = ceil($totalAsientos / 4); // Suponiendo 4 columnas por fila
-    
+
         for ($fila = 1; $fila <= $filas; $fila++) {
             for ($columna = 1; $columna <= 4; $columna++) {
                 $numeroAsiento = (($fila - 1) * 4) + $columna;
@@ -48,7 +59,7 @@ class VueloController extends Controller
                 }
             }
         }
-    
+
         return $asientos;
     }
 
@@ -132,6 +143,7 @@ class VueloController extends Controller
      */
     public function update(Request $request, $id_vuelo)
     {
+        
         // Encuentra el vuelo por su ID
         $vuelo = Vuelo::findOrFail($id_vuelo);
 
@@ -176,6 +188,105 @@ class VueloController extends Controller
     }
 
 
+    public function buscarVuelo(Request $request)
+    {
+        session()->flash('loading', 'Buscando vuelos....');
+        // Validación de datos
+        $validatedData = $request->validate([
+            'aerolinea' => 'nullable|string|max:255',
+            'escala' => 'nullable|in:noescala,siescala',
+            'hora' => 'nullable|integer|min:0|max:23',
+            'tarifa' => 'nullable|in:premium,flex,superflex',
+            'origen' => 'nullable|string|max:255',
+            'destino' => 'nullable|string|max:255|different:origen',
+            'fecha_despegue' => 'nullable|date|after_or_equal:today',
+            'fecha_regreso' => 'nullable|date|after_or_equal:fecha_despegue',
+        ]);
 
+        // Inicializar la consulta para los vuelos
+        $vuelos = Vuelo::query();
+        $aerolineas = Aerolinea::all();
+        $lugares = Lugar::all();
 
+        // Si no se envió el formulario, cargar todos los vuelos sin filtro
+        if (!$request->isMethod('POST')) {
+            $resultados = $vuelos->get();
+        } else {
+            // Aplicar filtros si el formulario fue enviado
+
+            // Filtrar por aerolínea
+            if (!empty($validatedData['aerolinea'])) {
+                $vuelos->whereHas('aerolinea', function ($query) use ($validatedData) {
+                    $query->where('aerolinea', 'LIKE', '%' . $validatedData['aerolinea'] . '%');
+                });
+            }
+
+            // Filtrar por origen
+            if (!empty($validatedData['origen'])) {
+                $vuelos->whereHas('origen', function ($query) use ($validatedData) {
+                    $query->where('lugar', 'LIKE', '%' . $validatedData['origen'] . '%');
+                });
+            }
+
+            // Filtrar por destino
+            if (!empty($validatedData['destino'])) {
+                $vuelos->whereHas('destino', function ($query) use ($validatedData) {
+                    $query->where('lugar', 'LIKE', '%' . $validatedData['destino'] . '%');
+                });
+            }
+
+            // Filtrar por tarifa
+            if (!empty($validatedData['tarifa'])) {
+                switch ($validatedData['tarifa']) {
+                    case 'premium':
+                        $vuelos->where('precio', '>', 10000);
+                        break;
+                    case 'flex':
+                        $vuelos->whereBetween('precio', [5000, 10000]);
+                        break;
+                    case 'superflex':
+                        $vuelos->where('precio', '<', 5000);
+                        break;
+                }
+            }
+
+            // Filtrar por fecha de despegue
+            if (!empty($validatedData['fecha_despegue'])) {
+                $vuelos->whereDate('fechasalida', $validatedData['fecha_despegue']);
+            }
+
+            // Filtrar por escala
+            if (!empty($validatedData['escala'])) {
+                $vuelos->where('escala', $validatedData['escala']);
+            }
+
+            // Filtrar por fecha de regreso
+            if (!empty($validatedData['fecha_regreso'])) {
+                $vuelos->whereDate('fecharegreso', $validatedData['fecha_regreso']);
+            }
+
+            // Filtrar por hora
+            if (!empty($validatedData['hora'])) {
+                $vuelos->where('hora', $validatedData['hora']);
+            }
+
+            // Obtener los resultados filtrados
+            $resultados = $vuelos->get();
+        }
+
+        // Asegurarse de que todos los vuelos tengan asientos generados
+        foreach ($resultados as $vuelo) {
+            if (empty($vuelo->asientos)) {
+                $vuelo->asientos = $this->generarAsientos($vuelo->numeroasientos ?? 0);
+            }
+        }
+
+        // Si no hay resultados, mostrar un mensaje
+        if ($resultados->isEmpty()) {
+            session()->flash('message', 'No se encontraron vuelos.');
+        }
+
+        // Pasar los resultados a la vista
+        return view('vuelos.Vuelosu', compact('resultados', 'aerolineas', 'lugares'));
+    }
 }

@@ -46,4 +46,15 @@ class Vuelo extends Model
     {
         return $this->belongsTo(Lugar::class, 'id_destino');
     }
+    
+    public function getTarifaAttribute()
+    {
+        if ($this->precio > 10000) {
+            return 'Premium';
+        } elseif ($this->precio >= 5000) {
+            return 'Flexible';
+        } else {
+            return 'Muy económica';
+        }
+    }
 }

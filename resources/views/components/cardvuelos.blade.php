@@ -9,6 +9,9 @@
             </h5>
         </a>
         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 text-center">
+            <strong>Aerolinea:</strong> {{ $vuelo->aerolinea->aerolinea }}
+        </p>
+        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 text-center">
             <strong>Fecha de salida:</strong> {{ $vuelo->fechasalida }}
         </p>
         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 text-center">
@@ -53,11 +56,11 @@
                             @csrf
                             <div>
                                 <label for="destino" class="block text-sm font-medium text-gray-700">Destino</label>
-                                <input type="text" id="destino" name="destino" class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg text-gray-800" value="{{ $vuelo->destino->lugar }}" required>
+                                <input type="text" id="destino" name="destino" class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg text-gray-800" value="{{ $vuelo->destino->lugar }}" readonly required>
                             </div>
                             <div>
                                 <label for="salida" class="block text-sm font-medium text-gray-700">Punto de partida</label>
-                                <input type="text" id="salida" name="salida" class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg text-gray-800" value="{{ $vuelo->origen->lugar }}" required>
+                                <input type="text" id="salida" name="salida" class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg text-gray-800" value="{{ $vuelo->origen->lugar }}" readonly required>
                             </div>
                             <div class="grid grid-cols-2 gap-4">
                                 <div>

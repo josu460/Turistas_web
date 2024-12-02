@@ -30,6 +30,8 @@ Route::resource('vuelos', VueloController::class);
 
 Route::get('/Vuelosu', [VueloController::class, 'otraVista'])->name('Vuelosu');
 
+Route::post('/buscarVuelo', [VueloController::class, 'buscarVuelo'])->name('buscarVuelo');
+
 
 });
 
