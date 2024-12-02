@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Hotel;
 use App\Http\Requests\RegistrarHotel;
+use App\Models\Lugar;
 
 class hotelescontroller extends Controller
 {
@@ -42,8 +43,13 @@ class hotelescontroller extends Controller
 
   public function create()
   {
-    return view('adminhoteles.HotelesA');
+      // Extraer los datos de la tabla Lugares
+      $lugares = Lugar::all();      
+  
+      // Enviar los datos a la vista
+      return view('adminhoteles.HotelesA', compact('lugares'));
   }
+  
 
   /**
   * Store a newly created resource in storage.

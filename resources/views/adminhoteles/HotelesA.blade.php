@@ -151,6 +151,20 @@
               </div>
 
               <div>
+                <label for="id_origen" class="block text-sm font-medium text-gray-700">Destino donde se encuentra el hotel</label>
+                <select id="id_origen" name="id_origen"
+                  class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg text-gray-800 focus:ring-blue-500 focus:border-blue-500">
+                  <option value="">Seleccione un lugar</option>
+                  @if(isset($lugares))
+                    @foreach($lugares as $lugar)
+                      <option value="{{ $lugar->id }}">{{ $lugar->lugar }}</option>
+                    @endforeach
+                  @endif
+                </select>
+                <small>{{ $errors->first('id_origen') }}</small>
+              </div>
+
+              <div>
                 <label for="descripcion" class="block text-sm font-medium text-gray-700">Descripción</label>
                 <textarea id="descripcion" name="descripcion"
                     class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg text-gray-800 focus:ring-blue-500 focus:border-blue-500"
