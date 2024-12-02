@@ -6,6 +6,15 @@
     </div>
 
     <div class="flex justify-end mt-4">
+    <button data-modal-target="crearvuelo-modal" data-modal-toggle="crearvuelo-modal" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-full mr-5" type="button">
+            Agregar Lugar
+
+        </button>
+    <button data-modal-target="crearvuelo-modal" data-modal-toggle="crearvuelo-modal" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-full mr-5" type="button">
+            Agregar Aerolinea
+
+        </button>
+
         <!-- Modal toggle button -->
         <button data-modal-target="crearvuelo-modal" data-modal-toggle="crearvuelo-modal" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-full" type="button">
             Crear Vuelo
@@ -57,7 +66,7 @@
 
 
                             <div>
-                                <label for="precio" class="block text-sm font-medium text-gray-700">Precio </label>
+                                <label for="precio" class="block text-sm font-medium text-gray-700">Precio por boleto:</label>
                                 <input type="number" id="precio" name="precio" min="0" step="0.01"
                                     class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg text-gray-800 focus:ring-blue-500 focus:border-blue-500"
                                     placeholder="120.00">

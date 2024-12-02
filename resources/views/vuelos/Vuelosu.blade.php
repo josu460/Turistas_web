@@ -1,9 +1,5 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+
 
     <link rel="stylesheet" href="{{ asset('css/vuelos.css') }}">
 
@@ -106,12 +102,9 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-        <x-cardvuelos></x-cardvuelos>
-        <x-cardvuelos></x-cardvuelos>
-        <x-cardvuelos></x-cardvuelos>
-        <x-cardvuelos></x-cardvuelos>
-        <x-cardvuelos></x-cardvuelos>
-        <x-cardvuelos></x-cardvuelos>
+        @foreach ($vuelos as $vuelo)
+        <x-cardvuelos :vuelo="$vuelo" :aerolineas="$aerolineas" :lugares="$lugars"></x-cardvuelos>
+        @endforeach
     </div>
 
     <x-Footer> </x-Footer>

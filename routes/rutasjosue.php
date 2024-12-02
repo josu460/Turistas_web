@@ -14,7 +14,6 @@ Route::get('VuelosA',[VueloController::class,'index'])->name('VuelosA');
 Route::get('/Vuelosu',[avionescontroller::class,'index'])->name('Vuelosu');
 
 Route::get('/vuelos/{id}/edit', [VueloController::class, 'edit'])->name('vuelos.edit');
-Route::put('/vuelos/{id}/update', [VueloController::class, 'update'])->name('vuelos.update');
 
 
 Route:: get('/HomeAdministrador', function () {
@@ -28,6 +27,8 @@ Route::get('/reportes',[Reportes::class,'index'])->name('reportes');
 
 //rutas prueba 1 
 Route::resource('vuelos', VueloController::class);
+
+Route::get('/Vuelosu', [VueloController::class, 'otraVista'])->name('Vuelosu');
 
 
 });

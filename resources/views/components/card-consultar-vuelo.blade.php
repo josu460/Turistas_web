@@ -7,7 +7,7 @@
         <h2 class="font-semibold text-xl mb-2">Número de vuelo: {{ $vuelo->novuelo }}</h2>
         <p><strong>Fecha de salida:</strong> {{ $vuelo->fechasalida }}</p>
         <p><strong>Fecha de regreso:</strong> {{ $vuelo->fecharegreso }}</p>
-        <p><strong>Precio:</strong> ${{ number_format($vuelo->precio, 2) }}</p>
+        <p><strong>Precio por boleto:</strong> ${{ number_format($vuelo->precio, 2) }}</p>
         <p><strong>Hora:</strong> {{ $vuelo->hora }}</p>
         <p><strong>Duración:</strong> {{ $vuelo->duracion }}</p>
         <p><strong>Número de Asientos:</strong> {{ $vuelo->numeroasientos }}</p>
@@ -62,7 +62,7 @@
 
                                 <!-- Precio -->
                                 <div>
-                                    <label for="precio" class="block text-sm font-medium text-gray-700">Precio</label>
+                                    <label for="precio" class="block text-sm font-medium text-gray-700">Precio por boleto:</label>
                                     <input type="number" id="precio" name="precio" min="0" step="0.01" class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg text-gray-800 focus:ring-blue-500 focus:border-blue-500" value="{{ old('precio', $vuelo->precio) }}">
                                     <small>{{$errors->first('precio')}}</small>
                                 </div>
@@ -133,7 +133,15 @@
                                         @endforeach
                                     </select>
                                 </div>
-
+                                @if (session('yes'))
+                                <script>
+                                    Swal.fire({
+                                        title: "Todo correcto ",
+                                        text: "{{ session('yes') }}",
+                                        icon: "success"
+                                    });
+                                </script>
+                                @endif
 
                                 <!-- Botones -->
                                 <div class="text-center">
@@ -180,6 +188,15 @@
                                 Cancelar
                             </button>
                         </div>
+                        @if (session('eliminado'))
+                                <script>
+                                    Swal.fire({
+                                        title: "Todo correcto ",
+                                        text: "{{ session('eliminado') }}",
+                                        icon: "success"
+                                    });
+                                </script>
+                                @endif
                     </div>
                 </div>
             </div>
