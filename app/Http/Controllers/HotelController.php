@@ -10,6 +10,7 @@ class HotelController extends Controller
   /**
    * Display a listing of the resource.
    */
+
   public function index()
   {
     return view('hoteles.hotelesu'); // Retorna la vista principal de hoteles
@@ -52,18 +53,63 @@ class HotelController extends Controller
     $distancia = $validacion['campoDistancia'] ?? null;
     $servicios = $validacion['camposServicios'] ?? [];
 
-    // Buscar hoteles con los criterios y filtros
-    $hoteles = Hotel::whereHas('destinos', function ($query) use ($destino) {
-      $query->where('lugares.lugar', 'like', "%{$destino}%");
+    // Construcción de la consulta
+    $hoteles = Hotel::where(function ($query) use (
+      $destino,
+      $fechaInicio,
+      $fechaFin,
+      $habitaciones,
+      $adultos,
+      $ninos,
+      $estrellas,
+      $precio,
+      $distancia,
+      $servicios
+    ) {
+      // Búsqueda por destino
+      // if ($destino) {
+      //     $query->whereHas('destinos', function ($queryDestino) use ($destino) {
+      //         $queryDestino->where('lugares.lugar', 'like', "%{$destino}%");
+      //     });
+      // }
+
+      // Búsqueda por fechas
+      if ($fechaInicio && $fechaFin) {
+          $query->orWhere(function ($queryFechas) use ($fechaInicio, $fechaFin) {
+              $queryFechas->where('checkin', '<=', $fechaFin)
+                  ->where('checkout', '>=', $fechaInicio);
+          });
+      }
+
+      // // Búsqueda por habitaciones y capacidad
+      // if ($habitaciones) {
+      //     $query->orWhere('nohabitaciones', '>=', $habitaciones);
+      // }
+
+      // Filtros adicionales
+      if ($estrellas) {
+          $query->orWhere('calificacion_estrellas', '==', $estrellas);
+      }
+      if ($precio) {
+          $query->orWhere('precio', '<=', $precio);
+      }
+      // if ($distancia) {
+      //     $query->orWhere('ubicacion', '<=', $distancia); // Ajusta según cómo se mida la distancia
+      // }
+
+      // // Filtro por servicios (si corresponde)
+      // if (!empty($servicios)) {
+      //     foreach ($servicios as $servicio) {
+      //         $query->orWhereJsonContains('servicios', $servicio);
+      //     }
+      // }
     })->get();
-    // ->where(function ($query) use ($fechaInicio, $fechaFin) {
-    //   $query->where('checkin', '<=', $fechaFin) // checkin del hotel debe ser antes o igual al check-out del usuario
-    //         ->where('checkout', '>=', $fechaInicio); // checkout del hotel debe ser después o igual al check-in del usuario
-    // })->get();
-  
+
+    // Depurar resultados para verificar
+    //dd($hoteles);
 
     // Retornar a la vista con los datos validados
-  return view('hoteles.hotelesu', compact('hoteles', 'estrellas', 'precio', 'distancia', 'servicios'));
+    return view('hoteles.hotelesu', compact('hoteles', 'estrellas', 'precio', 'distancia', 'servicios'));
   }
 
   /**

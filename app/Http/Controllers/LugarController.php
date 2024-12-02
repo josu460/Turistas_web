@@ -32,13 +32,21 @@ class LugarController extends Controller
      */
     public function store(Request $request)
     {
+        // Validar los datos
+        $request->validate([
+            'lugar' => 'required|string|max:255|unique:lugares,lugar',
+        ]);
+    
+        // Crear un nuevo registro en la tabla Lugares
         $addlugar = new Lugar();
         $addlugar->lugar = $request->input('lugar');
         $addlugar->save();
-
-        session()->flash('corectou','Se agrego correctamente el lugar');
+    
+        // Mensaje de éxito
+        session()->flash('corectou', 'Se agregó correctamente el lugar');
         return redirect()->back();
     }
+    
 
     /**
      * Display the specified resource.

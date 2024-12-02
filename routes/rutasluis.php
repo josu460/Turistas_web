@@ -2,17 +2,18 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HotelController;
-
-// Tal vez no sea necesario
-//use App\Http\Controllers\hotelescontroller;
+use App\Http\Controllers\hotelescontroller;
 
 Route::middleware('auth')->group(function () {
 
-  // Rutas RESTful para la gestión de hoteles usando Eloquent
-  Route::resource('hotel', HotelController::class);
+  // Rutas RESTful para la gestión búsquedas de hoteles
+  Route::resource('hotel', HotelController::class);// Búsqueda de hoteles
+  Route::resource('hotelA', hotelescontroller::class);// Búsqueda de hoteles
 
   // Rutas específicas
   Route::post('/hotel/buscar', [HotelController::class, 'buscarHotel'])->name('hotel.buscarHotel');
+  
+
 
 
   /* Tal vez no sea necesario
