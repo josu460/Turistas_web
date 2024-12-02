@@ -2,10 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\avionescontroller;
-use App\Http\Controllers\hotelescontroller;
 use App\Http\Controllers\Reportes;
 use App\Http\Controllers\VueloController;
-use App\Http\Controllers\PruebaAviones;
+use App\Http\Controllers\AerolineaController;
+use App\Http\Controllers\LugarController;
 
 Route::middleware('auth')->group(function () {
 
@@ -32,6 +32,11 @@ Route::get('/Vuelosu', [VueloController::class, 'otraVista'])->name('Vuelosu');
 
 Route::post('/buscarVuelo', [VueloController::class, 'buscarVuelo'])->name('buscarVuelo');
 
+//rutas aerolinea
+Route::resource('aerolineas', AerolineaController::class);
+
+//rutas lugares
+Route::resource('lugars', LugarController::class);
 
 });
 

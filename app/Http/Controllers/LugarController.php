@@ -32,7 +32,12 @@ class LugarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $addlugar = new Lugar();
+        $addlugar->lugar = $request->input('lugar');
+        $addlugar->save();
+
+        session()->flash('corectou','Se agrego correctamente el lugar');
+        return redirect()->back();
     }
 
     /**
