@@ -17,6 +17,9 @@ class HotelController extends Controller
 
   public function buscarHotel(Request $request)
   {
+    // Inspeccionar los datos enviados desde el formulario
+    //dd($request->all());
+
     // Validación del formulario con los criterios de búsqueda y filtros
     $validacion = $request->validate([
       // Criterios de búsqueda principales
@@ -53,6 +56,10 @@ class HotelController extends Controller
     $hoteles = Hotel::whereHas('destinos', function ($query) use ($destino) {
       $query->where('lugares.lugar', 'like', "%{$destino}%");
     })->get();
+    // ->where(function ($query) use ($fechaInicio, $fechaFin) {
+    //   $query->where('checkin', '<=', $fechaFin) // checkin del hotel debe ser antes o igual al check-out del usuario
+    //         ->where('checkout', '>=', $fechaInicio); // checkout del hotel debe ser después o igual al check-in del usuario
+    // })->get();
   
 
     // Retornar a la vista con los datos validados

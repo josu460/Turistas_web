@@ -318,9 +318,8 @@
         <input value="desayuno" name="campoServicios[]" type="checkbox" id="breakfast" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600">
         <label for="breakfast" class="ms-2 text-sm">Desayuno incluido</label>
       </div>
-    </li>
-  
-    </ul>
+    </li>  
+  </ul>
 </div>
 
 <!-- Contenedor de la lista de resultados de hoteles -->
@@ -330,201 +329,151 @@
   <ul class="divide-y divide-gray-200">
 
   @if(isset($hoteles))
-    <ul>
-      @foreach($hoteles as $hotel)
-        <li class="py-4 flex flex-col lg:flex-row items-start lg:items-center space-y-4 lg:space-y-0 lg:space-x-6">
-          <!-- Imagen del hotel debe ser cargada desde la base de datos -->
-          <img src="{{ asset('img/Oaxaca.jpg')}}" alt="Hotel 1" class="w-full lg:w-40 h-32 object-cover rounded-md">
-          <div class="flex-1 space-y-2">
-            <div class="flex justify-between">
-              <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{{$hotel->hotel}}</h3>
-              <p class="text-sm text-gray-500 dark:text-gray-300">Ubicación: {{$hotel->ubicacion}}</p>
+    @foreach($hoteles as $hotel)
+      <li class="py-4 flex flex-col lg:flex-row items-start lg:items-center space-y-4 lg:space-y-0 lg:space-x-6">
+        <!-- Imagen del hotel debe ser cargada desde la base de datos -->
+        <img src="{{ asset('img/Oaxaca.jpg')}}" alt="Hotel 1" class="w-full lg:w-40 h-32 object-cover rounded-md">
+        <div class="flex-1 space-y-2">
+          <div class="flex justify-between">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{{$hotel->hotel}}</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-300">Ubicación: {{$hotel->ubicacion}}</p>
+        </div>
+
+        <div class="flex items-center space-x-2 text-yellow-400">
+          <!-- Calificación de estrellas -->
+          <span class="text-lg">
+            @switch($hotel->calificacion_estrellas)
+              @case(1)
+                &#9733;&#9734;&#9734;&#9734;&#9734;
+              @break
+              @case(2)
+                &#9733;&#9733;&#9734;&#9734;&#9734;
+              @break
+              @case(3)
+                &#9733;&#9733;&#9733;&#9734;&#9734;
+              @break
+              @case(4)
+                &#9733;&#9733;&#9733;&#9733;&#9734;
+              @break
+              @case(5)
+                &#9733;&#9733;&#9733;&#9733;&#9733;
+              @break
+            @endswitch
+          </span>
+          <span class="text-sm text-gray-500">({{$hotel->calificacion_estrellas}} / 5)</span>
+        </div>
+
+        <p class="text-gray-500 dark:text-gray-300">Precio por noche: <span class="font-semibold">${{$hotel->precio}}</span></p>
+        <p class="text-gray-500 dark:text-gray-300">Habitaciones disponibles: <span class="font-semibold">{{$hotel->nohabitaciones}}</span></p>
+
+        <!-- Button to open the drawer -->
+        <button class="text-blue-600 hover:underline dark:text-blue-400" type="button" data-drawer-target="drawer-example" data-drawer-show="drawer-example" aria-controls="drawer-example">
+          Ver detalles
+        </button>
+
+        <!-- Drawer component -->
+        <div id="drawer-example" class="fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white w-96 dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-label">
+              
+          <h5 id="drawer-label" class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
+          <svg class="w-4 h-4 mr-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+          </svg>
+            Detalles del Hotel
+          </h5>
+              
+          <button type="button" data-drawer-hide="drawer-example" aria-controls="drawer-example" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 right-2.5 flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+            </svg>
+            <span class="sr-only">Close menu</span>
+          </button>
+
+          <!-- Hotel details -->
+          <div class="flex flex-col items-start space-y-4">
+            <div id="controls-carousel" class="relative w-full" data-carousel="static">
+                    
+              <!-- Carousel wrapper -->
+              <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+                    
+                <!-- Item 1 -->
+                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                  <img src="{{ asset('img/Oaxaca.jpg')}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                </div>
+                    
+                <!-- Item 2 -->
+                <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
+                  <img src="{{ asset('img/albercahotel.jpg')}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                </div>
+                    
+                <!-- Item 3 -->
+                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                  <img src="{{ asset('img/bañohotel.jpg')}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                </div>
+                    
+                <!-- Item 4 -->
+                  <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                    <img src="{{ asset('img/cuartohotel.jpeg')}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                  </div>
+                    
+                <!-- Item 5 -->
+                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                  <img src="{{ asset('img/restaurantehotel.jpeg')}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                </div>
+
+                <!-- Slider controls -->
+                <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+                  <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                    <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4" />
+                    </svg>
+                    <span class="sr-only">Previous</span>
+                  </span>
+                </button>
+                
+                <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+                  <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                    <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+                    </svg>
+                    <span class="sr-only">Next</span>
+                  </span>
+                </button>
+              </div>
+              
+              <h2 class="text-xl font-semibold text-gray-900 dark:text-white">{{$hotel->hotel}}</h2>
+                                 
+              <div class="flex items-center text-yellow-500">
+                <span class="mr-2 text-sm font-medium">({{$hotel->calificacion_estrellas}} / 5)</span>
+                <span class="text-sm">★★★★☆</span>
+              </div>
+                                    
+              <p class="text-lg text-gray-900 dark:text-white"><strong>Precio por noche:</strong> ${{$hotel->precio}}</p>
+              <p class="text-lg text-gray-900 dark:text-white"><strong>Habitaciones disponibles:</strong> {{$hotel->nohabitaciones}}</p>
+                                    
+              <div class="flex justify-center w-full">
+                <button type="button" class="px-6 py-3.5 text-base font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Reservar</button>
+              </div>
             </div>
-
-            <div class="flex items-center space-x-2 text-yellow-400">
-              <!-- Calificación de estrellas -->
-              <span class="text-lg">
-                @switch($hotel->calificacion_estrellas)
-                  @case(1)
-                    &#9733;&#9734;&#9734;&#9734;&#9734;
-                    @break
-                  @case(2)
-                    &#9733;&#9733;&#9734;&#9734;&#9734;
-                    @break
-                  @case(3)
-                    &#9733;&#9733;&#9733;&#9734;&#9734;
-                    @break
-                  @case(4)
-                    &#9733;&#9733;&#9733;&#9733;&#9734;
-                    @break
-                  @case(5)
-                    &#9733;&#9733;&#9733;&#9733;&#9733;
-                    @break
-                  @endswitch
-              </span>
-              <span class="text-sm text-gray-500">({{$hotel->calificacion_estrellas}} / 5)</span>
-            </div>
-
-            <p class="text-gray-500 dark:text-gray-300">Precio por noche: <span class="font-semibold">${{$hotel->precio}}</span></p>
-            <p class="text-gray-500 dark:text-gray-300">Habitaciones disponibles: <span class="font-semibold">{{$hotel->nohabitaciones}}</span></p>
-
-            <!-- Button to open the drawer -->
-            <button class="text-blue-600 hover:underline dark:text-blue-400" type="button" data-drawer-target="drawer-example" data-drawer-show="drawer-example" aria-controls="drawer-example">
-              Ver detalles
-            </button>
-          
-        
           </div>
+        </div>
          
 
-        </li>
-        @endforeach
-    </ul>
+      </li>
+    @endforeach
+  </ul>
+  
   @else
     <h2 class="text-center text-2xl text-gray-500 dark:text-gray-300">
       No hay hoteles disponibles
     </h2>
   @endif
                     
-    <!-- Hotel 1 -->
-    <li class="py-4 flex flex-col lg:flex-row items-start lg:items-center space-y-4 lg:space-y-0 lg:space-x-6">
-                        <img src="{{ asset('img/Oaxaca.jpg')}}" alt="Hotel 1" class="w-full lg:w-40 h-32 object-cover rounded-md">
-                        
-                        <div class="flex-1 space-y-2">
-                            <div class="flex justify-between">
-                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Hotel Victoria </h3>
-                                <p class="text-sm text-gray-500 dark:text-gray-300">Ubicación: Ciudad X</p>
-                            </div>
-                            
-                            <div class="flex items-center space-x-2 text-yellow-400">
-                                <!-- Calificación de estrellas -->
-                                <span class="text-lg">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
-                                <span class="text-sm text-gray-500">(3.5 / 5)</span>
-                            </div>
-                            <p class="text-gray-500 dark:text-gray-300">Precio por noche: <span class="font-semibold">$120</span></p>
-                            <p class="text-gray-500 dark:text-gray-300">Habitaciones disponibles: <span class="font-semibold">5</span></p>
+  
+  </div><!-- Se cierra el contenedor de la lista de hoteles -->
+</div><!-- Se cierra el contenedor de los resultados de hoteles -->
+</div><!-- Se cierra el contenedor de los filtros y resultados de hoteles -->
 
-
-                            <!-- Button to open the drawer -->
-                            <button class="text-blue-600 hover:underline dark:text-blue-400" type="button" data-drawer-target="drawer-example" data-drawer-show="drawer-example" aria-controls="drawer-example">
-                                Ver detalles
-                            </button>
-
-                            <!-- Drawer component -->
-                            <div id="drawer-example" class="fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white w-96 dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-label">
-                                <h5 id="drawer-label" class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
-                                    <svg class="w-4 h-4 mr-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-                                    </svg>
-                                    Detalles del Hotel
-                                </h5>
-                                <button type="button" data-drawer-hide="drawer-example" aria-controls="drawer-example" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 right-2.5 flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
-                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                    </svg>
-                                    <span class="sr-only">Close menu</span>
-                                </button>
-
-                                <!-- Hotel details -->
-                                <div class="flex flex-col items-start space-y-4">
-
-
-                                    <div id="controls-carousel" class="relative w-full" data-carousel="static">
-                                        <!-- Carousel wrapper -->
-                                        <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
-                                            <!-- Item 1 -->
-                                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                                                <img src="{{ asset('img/Oaxaca.jpg')}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                                            </div>
-                                            <!-- Item 2 -->
-                                            <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
-                                                <img src="{{ asset('img/albercahotel.jpg')}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                                            </div>
-                                            <!-- Item 3 -->
-                                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                                                <img src="{{ asset('img/bañohotel.jpg')}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                                            </div>
-                                            <!-- Item 4 -->
-                                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                                                <img src="{{ asset('img/cuartohotel.jpeg')}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                                            </div>
-                                            <!-- Item 5 -->
-                                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                                                <img src="{{ asset('img/restaurantehotel.jpeg')}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                                            </div>
-                                        </div>
-                                        <!-- Slider controls -->
-                                        <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-                                            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                                                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4" />
-                                                </svg>
-                                                <span class="sr-only">Previous</span>
-                                            </span>
-                                        </button>
-                                        <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-                                            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                                                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
-                                                </svg>
-                                                <span class="sr-only">Next</span>
-                                            </span>
-                                        </button>
-                                    </div>
-
-                                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Hotel Victoria</h2>
-                                    <div class="flex items-center text-yellow-500">
-                                        <span class="mr-2 text-sm font-medium">(3.5 / 5)</span>
-                                        <span class="text-sm">★★★★☆</span>
-                                    </div>
-                                    <p class="text-lg text-gray-900 dark:text-white"><strong>Precio por noche:</strong> $120</p>
-                                    <p class="text-lg text-gray-900 dark:text-white"><strong>Habitaciones disponibles:</strong> 5</p>
-                                    <div class="flex justify-center w-full">
-                                        <button type="button" class="px-6 py-3.5 text-base font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Reservar</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </li>                    
-                </ul>
-            </div>
-        </div>
-        </div>
-        </div>
-
-        <!-- Mostrar el valor de estrellas seleccionadas -->
-         {{ $estrellas ?? 'Nada' }}
-         {{ $precio ?? 'Nada' }}
-         {{ $distancia ?? 'Nada' }}
-         
-         {{-- Mostrar el valor de servicios seleccionados --}}
-       
-        {{-- O iterar sobre el array de servicios --}}    
-        @if (!empty($servicios))
-        <ul>
-          @foreach ($servicios as $servicio)
-            <li>{{ $servicio }}</li>
-          @endforeach
-        </ul>
-        @else
-          <p>No se seleccionaron servicios.</p>
-        @endif
-
-        {{-- Mostrar los hoteles (para comprobar) --}}
-@if(isset($hoteles))
-    <ul>
-        @foreach($hoteles as $hotel)
-            <li>{{ $hotel->hotel }} - {{ $hotel->ubicacion }} - {{ $hotel->precio }}</li>
-        @endforeach
-    </ul>
-@else
-    <p>No se encontraron hoteles para el destino seleccionado.</p>
-@endif
-
-
-
-
+    
 </main>
 
   <script>
