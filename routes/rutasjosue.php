@@ -6,6 +6,7 @@ use App\Http\Controllers\Reportes;
 use App\Http\Controllers\VueloController;
 use App\Http\Controllers\AerolineaController;
 use App\Http\Controllers\LugarController;
+use App\Http\Controllers\ClienteVueloController;
 
 Route::middleware('auth')->group(function () {
 
@@ -37,6 +38,13 @@ Route::resource('aerolineas', AerolineaController::class);
 
 //rutas lugares
 Route::resource('lugars', LugarController::class);
+
+//rutas comprar vuelo
+Route::resource('cliente_vuelos', ClienteVueloController::class);
+
+Route::get('/comprarvuelo/{vuelo}', [ClienteVueloController::class, 'mostrarVistaCompra'])->name('comprar.vuelo');
+Route::post('/comprarvuelo', [ClienteVueloController::class, 'confirmarCompra'])->name('confirmar.vuelo');
+
 
 });
 

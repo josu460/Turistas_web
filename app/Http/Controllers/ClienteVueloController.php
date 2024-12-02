@@ -4,62 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\ClienteVuelo;
 use Illuminate\Http\Request;
+use App\Models\Vuelo;
 
 class ClienteVueloController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
+    // VueloController.php
+public function mostrarVistaCompra($id)
+{
+    $vuelo = Vuelo::with('asientos')->findOrFail($id);
+    return view('vuelos.comprarvuelo', compact('vuelo'));
+}
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+public function confirmarCompra(Request $request)
+{
+    // Procesa la compra del vuelo
+    // $request->all() contiene los datos enviados
+    return redirect()->route('home')->with('success', 'Compra confirmada');
+}
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(ClienteVuelo $clienteVuelo)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(ClienteVuelo $clienteVuelo)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, ClienteVuelo $clienteVuelo)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(ClienteVuelo $clienteVuelo)
-    {
-        //
-    }
 }

@@ -57,5 +57,7 @@ class Vuelo extends Model
             return 'Muy económica';
         }
     }
+
+    
 }
     
