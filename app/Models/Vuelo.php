@@ -58,3 +58,4 @@ class Vuelo extends Model
         }
     }
 }
+    

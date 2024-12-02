@@ -26,4 +26,14 @@ class PasswordController extends Controller
 
         return back()->with('status', 'password-updated');
     }
+
+
+    public function reset(Request $request)
+    {
+    $request->validate([
+        'password' => ['required', 'confirmed', Password::min(8)->letters()->numbers()],
+    ]);
+
+    // Código para restablecer la contraseña...
+}
 }

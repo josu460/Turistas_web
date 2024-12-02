@@ -9,7 +9,7 @@ class HotelServicio extends Model
 {
     use HasFactory;
 
-    protected $table = 'hotelesservicios';
+    protected $table = 'hoteles_servicios';
     protected $fillable = ['id_hotel', 'id_servicio', 'condiciones_uso'];
 
     // Relación con Hotel
