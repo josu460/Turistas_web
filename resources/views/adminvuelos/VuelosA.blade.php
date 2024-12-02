@@ -92,6 +92,7 @@
                             <span class="sr-only">Cerrar</span>
                         </button>
                     </div>
+                    
                     <!-- Cuerpo del modal con el formulario -->
                     <div class="p-4 md:p-5 space-y-4">
                         <form action="{{ route('lugars.store') }}" method="POST">

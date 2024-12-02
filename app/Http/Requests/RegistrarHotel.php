@@ -21,12 +21,14 @@ class RegistrarHotel extends FormRequest
     {
         return [
             'hotel' => 'required|string|max:255',
+            'checkin' => 'required|date',
+            'checkout' => 'required|date|after:checkin',
             'no_habitaciones' => 'required|integer|min:1',
-            'calificacion' => 'nullable|integer|between:1,5',
+            'calificacion' => 'required|integer|min:1|max:5',
             'precio' => 'required|numeric|min:0',
             'ubicacion' => 'required|string|max:255',
             'descripcion' => 'required|string',
-            'politicas_cancelacion' => 'nullable|string',
+            'imagen' => 'nullable|image|max:2048',
         ];
         
     }

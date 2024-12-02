@@ -33,7 +33,7 @@
                     <x-nav-link :href="route('VuelosA')" :active="request()->routeIs('VuelosA')">
                         {{ __('VuelosAdmin') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('consultaH')" :active="request()->routeIs('consultaH')">
+                    <x-nav-link :href="route('HotelesA')" :active="request()->routeIs('consultaH')">
                         {{ __('HotelesAdmin') }}
                     </x-nav-link>
                     <x-nav-link :href="route('reservacion.index')" :active="request()->routeIs('dashboard')">
