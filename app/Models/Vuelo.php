@@ -10,7 +10,7 @@ class Vuelo extends Model
     use HasFactory;
 
     protected $table = 'vuelos';
-    protected $fillable = ['novuelo', 'fechasalida', 'fecharegreso', 'precio', 'hora', 'duracion', 'id_aerolinea', 'id_origen', 'id_destino'];
+    protected $fillable = ['novuelo', 'fechasalida', 'fecharegreso', 'precio', 'hora', 'duracion','imagen', 'id_aerolinea', 'id_origen', 'id_destino','numeroasientos'];
 
     // Relación muchos a muchos con Clientes
     public function clientes()
@@ -45,5 +45,16 @@ class Vuelo extends Model
     public function destino()
     {
         return $this->belongsTo(Lugar::class, 'id_destino');
+    }
+    
+    public function getTarifaAttribute()
+    {
+        if ($this->precio > 10000) {
+            return 'Premium';
+        } elseif ($this->precio >= 5000) {
+            return 'Flexible';
+        } else {
+            return 'Muy económica';
+        }
     }
 }

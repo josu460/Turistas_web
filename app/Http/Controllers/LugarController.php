@@ -20,15 +20,24 @@ class LugarController extends Controller
      */
     public function create()
     {
-        //
+        $origenes = Lugar::where('tipo', 'origen')->get(); // Supongamos que los lugares tienen un tipo
+        $destinos = Lugar::where('tipo', 'destino')->get();
+    
+        return view('crearVuelo', compact('origenes', 'destinos'));
     }
+    
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $addlugar = new Lugar();
+        $addlugar->lugar = $request->input('lugar');
+        $addlugar->save();
+
+        session()->flash('corectou','Se agrego correctamente el lugar');
+        return redirect()->back();
     }
 
     /**

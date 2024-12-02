@@ -14,8 +14,10 @@ class CreateVuelosTable extends Migration
             $table->date('fechasalida');
             $table->date('fecharegreso')->nullable();
             $table->decimal('precio', 10, 2);
-            $table->time('hora');
-            $table->integer('duracion'); 
+            $table->string('hora');
+            $table->integer('duracion');
+            $table->integer('numeroasientos'); 
+            $table->string('imagen')->nullable();
             $table->foreignId('id_aerolinea')->constrained('aerolineas')->onDelete('cascade');
             $table->foreignId('id_origen')->constrained('lugares')->onDelete('cascade');
             $table->foreignId('id_destino')->constrained('lugares')->onDelete('cascade');
